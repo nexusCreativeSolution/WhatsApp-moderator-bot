@@ -1,4 +1,4 @@
-Got it! Here’s the updated README with the correct GitHub repository link and badge URLs:
+Please note that this bot is provided as-is without any guarantees or warranties. Use it at your own risk and ensure you comply with all relevant terms of service and privacy policies. The developers are not responsible for any misuse, damages, or issues arising from the use of this bot.
 
 ---
 
