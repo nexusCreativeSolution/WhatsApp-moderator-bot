@@ -2,7 +2,7 @@
 
 <p align="center">  
   <a href="https://github.com/FXastro/bot">
-    <img alt="WhatsApp BOT" height="300" src="https://raw.githubusercontent.com/FXastro/bot/main/logo.jpeg">
+    <img alt="WhatsApp BOT" height="300" src="https://raw.githubusercontent.com/FXastro/bot/main/lib/logo.jpeg">
   </a>
 </p>
 
