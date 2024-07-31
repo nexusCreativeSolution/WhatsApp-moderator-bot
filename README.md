@@ -334,8 +334,6 @@ Deploy WhatsApp BOT locally on your machine:
 
 ---
 
-```
-
 This update uses button-style badges for the deployment platforms, similar to the style in the example you provided.
 
 ## 📜 License
@@ -344,16 +342,9 @@ This project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE
 
 ---
 
-## 💼 Developer
-
-<a href="https://github.com/FXastro"><img src="https://github.com/FXastro.png" width="250" height="250" alt="FX Astro"/></a>
-
-**WhatsApp BOT** - By [FX Astro](https://github.com/FXastro)
-
----
-
 ## ⚠️ Reminder
 
+- This Bot is Made By Astro only.
 - This bot is not made by WhatsApp Inc. Misuse may result in your WhatsApp account being banned.
 - Use at your own risk. The developers are not responsible for any issues or bans.
 
@@ -362,4 +353,3 @@ This project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE
 - Not For Sale.
 - If a plugin's code is obfuscated, you do not have permission to edit it.
 - Give credits if you are using or re-uploading any files.
-```
