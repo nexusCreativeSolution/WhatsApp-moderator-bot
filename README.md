@@ -8,7 +8,7 @@ Got it! Here’s the updated README with the correct GitHub repository link and 
 
 Welcome to WhatsApp BOT, an intelligent bot designed to enhance your WhatsApp experience through automation. Built with Node.js, this bot allows for seamless interaction, automated responses, and advanced features to manage conversations efficiently.
 
-![WhatsApp BOT Overview](path/to/intro-image.png)
+![WhatsApp BOT Overview](https://raw.githubusercontent.com/FXastro/bot/main/logo.jpeg)
 
 **Key Stats:**
 
