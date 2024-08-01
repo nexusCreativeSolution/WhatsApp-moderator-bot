@@ -1,11 +1,5 @@
 # FX BOT
 
-<p align="center">  
-  <a href="https://github.com/FXastro/bot">
-    <img alt="WhatsApp BOT" height="300" src="https://raw.githubusercontent.com/FXastro/bot/main/lib/logo.jpeg">
-  </a>
-</p>
-
 <p align="center">
   <a href="https://github.com/FXastro"><img title="Author" src="https://img.shields.io/badge/WhatsApp%20BOT-black?style=for-the-badge&logo=whatsapp"></a>
 </p>
@@ -41,20 +35,6 @@
 
 Please note that this bot is provided as-is without any guarantees or warranties. Use it at your own risk and ensure you comply with all relevant terms of service and privacy policies. The developers are not responsible for any misuse, damages, or issues arising from the use of this bot.
 
----
-
-## 🌟 Features
-
-- **Automated Messaging:** Sends and receives messages based on predefined rules.
-- **Custom Commands:** Define commands to perform specific actions.
-- **User Management:** Handle and manage user interactions effectively.
-- **Rich Media Support:** Send images, videos, and documents.
-- **Error Handling:** Built-in mechanisms to handle and log errors.
-
----
-
-Sure! Here’s how you can update the deployment sections to use the button-style similar to the ones you provided:
-
 ## Deployment Platforms
 
 Deploy WhatsApp BOT on various platforms:
@@ -81,37 +61,39 @@ Deploy WhatsApp BOT on Heroku:
 
 2. **Clone the Repository:**
 
-   ```bash
-   git clone https://github.com/FXastro/bot.git
-   ```
+```bash
+git clone https://github.com/FXastro/bot.git
+```
 
 3. **Navigate to the Project Directory:**
 
-   ```bash
-   cd bot
-   ```
+```bash
+cd bot
+```
 
 4. **Create a Heroku App:**
 
-   ```bash
-   heroku create
-   ```
+```bash
+heroku create
+```
 
 5. **Deploy to Heroku:**
 
-   ```bash
-   git push heroku main
-   ```
+```bash
+git push heroku main
+```
 
 6. **Set Environment Variables:**
-   - Use the Heroku CLI or dashboard to set your API key:
-     ```bash
-     heroku config:set WHATSAPP_API_KEY=your_api_key
-     ```
-     <br>
-     <a href="https://heroku.com/deploy?template=https://github.com/FXastro/bot">
-       <img alt='Deploy to Heroku' src='https://www.herokucdn.com/deploy/button.svg'/>
-     </a>
+
+- Use the Heroku CLI or dashboard to set your API key:
+  `bash
+heroku config:set WHATSAPP_API_KEY=your_api_key
+`
+
+<br>
+<a href="https://heroku.com/deploy?template=https://github.com/FXastro/bot">
+<img alt='Deploy to Heroku' src='https://www.herokucdn.com/deploy/button.svg'/>
+</a>
 
 ---
 

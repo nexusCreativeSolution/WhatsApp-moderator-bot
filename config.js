@@ -1,58 +1,62 @@
-const { Sequelize } = require("sequelize");
-const fs = require("fs");
-require("dotenv").config();
-const toBool = (x) => x === "true";
-const DATABASE_URL = process.env.DATABASE_URL || "./assets/database.db";
+const fs = require('fs-extra')
+if (fs.existsSync('config.env')) require('dotenv').config({ path: __dirname + '/config.env' })
+
+global.mongodb = process.env.MONGODB_URI || ''
+global.port = 5000
+global.audio = ''
+global.video = ''
+global.blockJids = process.env.BLOCK_JID || '120363023983262391@g.us'
+global.allowJids = process.env.ALLOW_JID || '120363022922797633@g.us'
+global.email = 'samsamsun789@gmail.com'
+global.location = 'Lahore Pakistan'
+global.timezone = process.env.TIME_ZONE || 'Asia/Karachi'
+global.gurl = 'https://youtube.com/c/SuhailTechInfo' // add your username
+global.sudo = process.env.SUDO ? process.env.SUDO.replace(/[\s+]/g, '') : '923184474176'
+global.devs = '923184474176' //Dont change it From here
+global.github = process.env.YOUR_GITHUB || 'https://github.com/SuhailTechInfo/Suhail-Md'
+global.scan = process.env.QR_URL || 'https://replit.com/@SuhailTechInfo/Suhail-Md?v=1'
+global.website = 'https://github.com/SuhailTechInfo/Suhail-Md' //wa.me/+923000000000
+global.THUMB_IMAGE = process.env.THUMB_IMAGE || 'https://i.imgur.com/NpA3ZsJ.jpeg'
 module.exports = {
-  ANTILINK: toBool(process.env.ANTI_LINK) || false,
-  LOGS: toBool(process.env.LOGS) || true,
-  ANTILINK_ACTION: process.env.ANTI_LINK || "kick",
-  SESSION_ID: process.env.SESSION_ID ||null,
-  LANG: process.env.LANG || "EN",
-  AUTH_TOKEN: "",
-  HANDLERS:
-    process.env.HANDLER === "false" || process.env.HANDLER === "null"
-      ? "^"
-      : "[#]",
-  RMBG_KEY: process.env.RMBG_KEY || false,
-  BRANCH: "main",
-  WARN_COUNT: 3,
-  PACKNAME: process.env.PACKNAME || "X-Asena",
-  WELCOME_MSG: process.env.WELCOME_MSG || "Hi @user Welcome to @gname",
-  GOODBYE_MSG: process.env.GOODBYE_MSG || "Hi @user It was Nice Seeing you",
-  AUTHOR: process.env.AUTHOR || "X-Electra",
-  SUDO:
-    process.env.SUDO || "918113921898,919598157259,918590508376,919383400679",
-  HEROKU_APP_NAME: process.env.HEROKU_APP_NAME || "",
-  HEROKU_API_KEY: process.env.HEROKU_API_KEY || "",
-  OWNER_NAME: process.env.OWNER_NAME || "Neeraj-X0",
-  HEROKU: toBool(process.env.HEROKU) || false,
-  BOT_NAME: process.env.BOT_NAME || "X-Asena",
-  AUTO_READ: toBool(process.env.AUTO_READ) || false,
-  AUTO_STATUS_READ: toBool(process.env.AUTO_STATUS_READ) || false,
-  PROCESSNAME: process.env.PROCESSNAME || "x-asena",
-  WORK_TYPE: process.env.WORK_TYPE || "private",
-  SESSION_URL: process.env.SESSION_URL || "",
-  DELETED_LOG: toBool(process.env.DELETED_LOG) || false,
-  DELETED_LOG_CHAT: process.env.DELETED_LOG_CHAT || false,
-  REMOVEBG: process.env.REMOVEBG || false,
-  DATABASE_URL: DATABASE_URL,
-  STATUS_SAVER: toBool(process.env.STATUS_SAVER) || true,
-  DATABASE:
-    DATABASE_URL === "./assets/database.db"
-      ? new Sequelize({
-          dialect: "sqlite",
-          storage: DATABASE_URL,
-          logging: false,
-        })
-      : new Sequelize(DATABASE_URL, {
-          dialect: "postgres",
-          ssl: true,
-          protocol: "postgres",
-          dialectOptions: {
-            native: true,
-            ssl: { require: true, rejectUnauthorized: false },
-          },
-          logging: false,
-        }),
-};
+ sessionName: process.env.SESSION_ID || '',
+ botname: process.env.BOT_NAME || 'sᴜʜᴀɪʟ-ᴍᴅ',
+ botbgm: process.env.BOT_BGM || 'false',
+ ownername: process.env.OWNER_NAME || `It'x Suhail`,
+ author: process.env.PACK_AUTHER || '',
+ errorChat: process.env.ERROR_CHAT || '',
+ read_status: process.env.AUTO_READ_STATUS || 'false',
+ save_status: process.env.AUTO_SAVE_STATUS || 'false',
+ packname: process.env.PACK_NAME || '',
+ autoreaction: process.env.AUTO_REACTION || 'false',
+ antibadword: process.env.ANTI_BAD_WORD || 'nobadwordokeyuntillYouPutAnWordHere',
+ alwaysonline: process.env.WAPRESENCE || '',
+ antifake: process.env.FAKE_COUNTRY_CODE || '212',
+ readmessage: process.env.READ_MESSAGE || 'false',
+ readcmds: process.env.READ_COMMANDS || 'true',
+ OWNER_NUMBER: OWNER_NUMBER ? process.env.OWNER_NUMBER.replace(/[\s+]/g, '') : '923184474176',
+ HANDLERS: process.env.PREFIX || ',',
+ warncount: process.env.WARN_COUNT || 3,
+ disablepm: process.env.DISABLE_PM || 'false',
+ MsgsInLog: process.env.MSGS_IN_LOG || 'false',
+ pmMsgsInLog: process.env.PM_MSGS_IN_LOGS || 'false',
+ antilink_values: process.env.ANTILINK_VALUES || 'https://,chat.whatsapp.com',
+ BRANCH: process.env.BRANCH || 'main',
+ HEROKU_APP_NAME: process.env.HEROKU_APP_NAME,
+ HEROKU_API_KEY: process.env.HEROKU_API_KEY,
+ REMOVE_BG_KEY: process.env.REMOVE_BG_KEY || '',
+ caption: process.env.CAPTION || '```ᴘᴏᴡᴇʀᴇᴅ ʙʏ sᴜʜᴀɪʟ²²¹-ᴍᴅ```',
+ OPENAI_API_KEY: process.env.OPENAI_API_KEY || '',
+ VERSION: process.env.VERSION || 'v.1.0.8',
+ LANG: process.env.THEME || 'SUHAIL',
+ menu: process.env.MENU || '',
+ WORKTYPE: process.env.WORKTYPE || process.env.MODE || 'private',
+ KOYEB_API: process.env.KOYEB_API || '',
+}
+
+let file = require.resolve(__filename)
+fs.watchFile(file, () => {
+ fs.unwatchFile(file)
+ console.log(`Update'${__filename}'`)
+ delete require.cache[file]
+ require(file)
+})
