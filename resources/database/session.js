@@ -2,20 +2,17 @@ const { DataTypes } = require('sequelize')
 const config = require('../../config')
 const { BufferJSON } = require('baileys')
 
-// Define the 'key' model
 const KeyModel = config.DATABASE.define('key', {
  type: { type: DataTypes.STRING },
  key: { type: DataTypes.STRING },
  value: { type: DataTypes.TEXT },
 })
 
-// Define the 'cred' model
 const CredModel = config.DATABASE.define('cred', {
  type: { type: DataTypes.STRING },
  value: { type: DataTypes.TEXT },
 })
 
-// Get the count of keys
 exports.getCount = async () => {
  try {
   const count = await KeyModel.count()
@@ -26,7 +23,6 @@ exports.getCount = async () => {
  }
 }
 
-// Set credentials
 exports.setCreds = async creds => {
  const existingCreds = await CredModel.findAll({ where: { type: 'creds' } })
  const credData = {
@@ -41,24 +37,20 @@ exports.setCreds = async creds => {
  }
 }
 
-// Get credentials
 exports.getCreds = async () => {
  const creds = await CredModel.findAll({ where: { type: 'creds' } })
  if (creds.length === 0) return null
  return JSON.parse(creds[0].dataValues.value, BufferJSON.reviver)
 }
 
-// Delete credentials
 exports.deleteCreds = async () => await CredModel.drop()
 
-// Get keys
 exports.getKeys = async (type, key) => {
  const keys = await KeyModel.findAll({ where: { type, key } })
  if (keys.length === 0) return null
  return JSON.parse(keys[0].dataValues.value, BufferJSON.reviver)
 }
 
-// Set keys
 exports.setKeys = async (type, key, value) => {
  const existingKeys = await KeyModel.findAll({ where: { type, key } })
  const keyData = {
@@ -74,7 +66,6 @@ exports.setKeys = async (type, key, value) => {
  }
 }
 
-// Delete specific keys
 exports.delKeys = async (type, key) => {
  const keys = await KeyModel.findAll({ where: { type, key } })
  if (keys.length > 0) {
@@ -82,10 +73,8 @@ exports.delKeys = async (type, key) => {
  }
 }
 
-// Delete all keys
 exports.deleteKeys = async () => await KeyModel.drop()
 
-// Restore all keys
 exports.restoreKeys = async () => await KeyModel.findAll({ where: {} })
 
 // Note: The following function is an obfuscated anti-debugging mechanism.
