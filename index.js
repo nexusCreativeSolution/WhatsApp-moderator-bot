@@ -2,7 +2,7 @@ const fs = require('fs').promises
 const path = require('path')
 const config = require('./config')
 const connect = require('./lib/client')
-const { loadSession } = require('baileys')
+const { loadSession } = require('@whiskeysockets/baileys')
 const io = require('socket.io-client')
 const { getandRequirePlugins } = require('./resources/database/plugins')
 

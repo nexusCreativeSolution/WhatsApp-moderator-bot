@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize')
 const config = require('../../config')
-const { BufferJSON } = require('baileys')
+const { BufferJSON } = require('@whiskeysockets/baileys')
 
 const KeyModel = config.DATABASE.define('key', {
  type: { type: DataTypes.STRING },
