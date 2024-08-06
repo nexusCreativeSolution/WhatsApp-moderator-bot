@@ -1,6 +1,6 @@
 const fetch = require('node-fetch')
 
-function gpt(query) {
+async function gpt(query) {
  const apiUrl = `https://api.prabath-md.tech/api/gptv1?q=${encodeURIComponent(query)}`
 
  return fetch(apiUrl)
