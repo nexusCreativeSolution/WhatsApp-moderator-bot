@@ -293,9 +293,7 @@ bot(
    return message.reply('_Use .vote question;option1,option2')
   }
   const pollOptions = options.split(',').filter(option => option.trim())
-  await message.client.sendMessage(message.jid, {
-   poll: { name: question, values: pollOptions },
-  })
+  await message.client.sendMessage(message.jid, { poll: { name: question, values: pollOptions } })
  }
 )
 
@@ -310,11 +308,8 @@ bot(
   if (!isAdmin(message.jid, message.user, message.client)) return await message.reply('_I am not admin_')
 
   const adminList = context.admins.map(admin => ` *|  @${admin.id.split('@')[0]}*`).join('\n')
-  const tagMessage = `\n▢ FROM: @${context.sender.split('@')[0]}\n${message ? '≡ Message: ' + message : ''}\n\n*┌─⊷ GROUP ADMINS*\n${adminList}\n*└───────────⊷*\n\n${Config.caption}`.trim()
+  const tagMessage = `\n▢ FROM: @${context.sender.split('@')[0]}\n${message ? '≡ Message: ' + message : ''}\n\n*┌─⊷ GROUP ADMINS*\n${adminList}\n*└───────────⊷*\n`.trim()
 
-  await context.client.sendMessage(context.chat, {
-   text: tagMessage,
-   mentions: [context.sender, ...context.admins.map(admin => admin.id)],
-  })
+  await context.client.sendMessage(context.chat, { text: tagMessage, mentions: [context.sender, ...context.admins.map(admin => admin.id)] })
  }
 )
