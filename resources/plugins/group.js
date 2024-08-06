@@ -1,4 +1,4 @@
-const { bot, isAdmin, parsedJid, isPrivate } = require('../lib')
+const { bot, isAdmin, parsedJid, isPrivate } = require('../../lib')
 bot(
  {
   pattern: 'add',
@@ -19,9 +19,7 @@ bot(
 
   await message.client.groupParticipantsUpdate(message.jid, jid, 'add')
 
-  return await message.reply(`_@${jid[0].split('@')[0]} added_`, {
-   mentions: [jid],
-  })
+  return await message.reply(`_@${jid[0].split('@')[0]} added_`, { mentions: [jid] })
  }
 )
 
@@ -45,9 +43,7 @@ bot(
 
   await message.client.groupParticipantsUpdate(message.jid, jid, 'remove')
 
-  return await message.reply(`_@${jid[0].split('@')[0]} kicked_`, {
-   mentions: [jid],
-  })
+  return await message.reply(`_@${jid[0].split('@')[0]} kicked_`, { mentions: [jid] })
  }
 )
 bot(
@@ -70,9 +66,7 @@ bot(
 
   await message.client.groupParticipantsUpdate(message.jid, jid, 'promote')
 
-  return await message.reply(`_@${jid[0].split('@')[0]} promoted as admin_`, {
-   mentions: [jid],
-  })
+  return await message.reply(`_@${jid[0].split('@')[0]} promoted as admin_`, { mentions: [jid] })
  }
 )
 bot(
@@ -95,9 +89,7 @@ bot(
 
   await message.client.groupParticipantsUpdate(message.jid, jid, 'demote')
 
-  return await message.reply(`_@${jid[0].split('@')[0]} demoted from admin_`, {
-   mentions: [jid],
-  })
+  return await message.reply(`_@${jid[0].split('@')[0]} demoted from admin_`, { mentions: [jid] })
  }
 )
 
@@ -108,7 +100,7 @@ bot(
   desc: 'nute group',
   type: 'group',
  },
- async (message, match, m, client) => {
+ async (message, client) => {
   if (!message.isGroup) return await message.reply('_This command is for groups_')
   if (!isAdmin(message.jid, message.user, message.client)) return await message.reply("_I'm not admin_")
   await message.reply('_Muting_')
@@ -123,7 +115,7 @@ bot(
   desc: 'unmute group',
   type: 'group',
  },
- async (message, match, m, client) => {
+ async (message, client) => {
   if (!message.isGroup) return await message.reply('_This command is for groups_')
   if (!isAdmin(message.jid, message.user, message.client)) return await message.reply("_I'm not admin_")
   await message.reply('_Unmuting_')
@@ -138,7 +130,7 @@ bot(
   desc: 'gets jid of all group members',
   type: 'group',
  },
- async (message, match, m, client) => {
+ async (message, client) => {
   if (!message.isGroup) return await message.reply('_This command is for groups_')
   let { participants } = await client.groupMetadata(message.jid)
   let participant = participants.map(u => u.id)
@@ -158,7 +150,7 @@ bot(
   desc: 'mention all users in group',
   type: 'group',
  },
- async (message, match) => {
+ async message => {
   if (!message.isGroup) return
   const { participants } = await message.client.groupMetadata(message.jid)
   let teks = ''
@@ -212,7 +204,7 @@ bot(
   desc: 'Allows All Members To Edit Gc Settings',
   type: 'group',
  },
- async (message, match) => {
+ async message => {
   if (!message.isGroup) return await message.reply('_This command is for groups_')
   if (!isAdmin(message.jid, message.user, message.client)) return await message.reply('_I am not admin_')
   await message.reply('_Unlocking Group_')
