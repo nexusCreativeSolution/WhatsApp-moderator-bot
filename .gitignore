@@ -7,3 +7,6 @@ session/
 assets/plugins/eval.js
 assets/database/store.json
 assets/database.db
+
+
+package-lock.json
