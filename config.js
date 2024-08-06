@@ -1,7 +1,7 @@
 const { Sequelize } = require('sequelize')
 require('dotenv').config()
 const toBool = x => x === 'true'
-const DATABASE_URL = process.env.DATABASE_URL || './assets/database.db'
+const DATABASE_URL = process.env.DATABASE_URL || './resources/database.db'
 module.exports = {
  ANTILINK: toBool(process.env.ANTI_LINK) || false,
  LOGS: toBool(process.env.LOGS) || true,
@@ -34,7 +34,7 @@ module.exports = {
  DATABASE_URL: DATABASE_URL,
  STATUS_SAVER: toBool(process.env.STATUS_SAVER) || true,
  DATABASE:
-  DATABASE_URL === './assets/database.db'
+  DATABASE_URL === './resources/database.db'
    ? new Sequelize({
       dialect: 'sqlite',
       storage: DATABASE_URL,

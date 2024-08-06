@@ -4,9 +4,9 @@ session/
 
 # Ignore the build directory
 
-assets/plugins/eval.js
-assets/database/store.json
-assets/database.db
+resources/plugins/eval.js
+resources/database/store.json
+resources/database.db
 
 
 package-lock.json

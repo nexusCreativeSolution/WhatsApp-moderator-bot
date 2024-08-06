@@ -4,7 +4,7 @@ const config = require('./config')
 const connect = require('./lib/client')
 const { loadSession } = require('baileys')
 const io = require('socket.io-client')
-const { getandRequirePlugins } = require('./assets/database/plugins')
+const { getandRequirePlugins } = require('./resources/database/plugins')
 
 global.__basedir = __dirname // Set the base directory for the project
 
@@ -27,13 +27,13 @@ async function startBot() {
    const credsData = await loadSession(config.SESSION_ID)
    fs.writeFileSync('./session/creds.json', JSON.stringify(credsData.creds, null, 2))
   }
-  await readAndRequireFiles(path.join(__dirname, '/assets/database/'))
+  await readAndRequireFiles(path.join(__dirname, '/resources/database/'))
   console.log('Syncing Database')
 
   await config.DATABASE.sync()
 
   console.log('⬇  Installing Plugins...')
-  await readAndRequireFiles(path.join(__dirname, '/assets/plugins/'))
+  await readAndRequireFiles(path.join(__dirname, '/resources/plugins/'))
   await getandRequirePlugins()
   console.log('✅ Plugins Installed!')
   const ws = io('https://socket.xasena.me/', { reconnection: true })
