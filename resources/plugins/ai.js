@@ -13,7 +13,7 @@ bot(
   await message.reply('_Thinking..._')
   const response = await gpt(match)
   const gptchat = '```GPT: ' + response + '```'
-  await message.sendMessage(message.jid, gptchat, message.quoted)
+  await message.sendMessage(message.jid, gptchat, { quoted: message })
  }
 )
 
@@ -28,7 +28,7 @@ bot(
   await message.reply('_factuating..._')
   const response = await gemini(match)
   const geminiChat = '```GEMINI: ' + response + '```'
-  await message.sendMessage(message.jid, geminiChat, message.quoted)
+  await message.sendMessage(message.jid, geminiChat, { quoted: message })
  }
 )
 
