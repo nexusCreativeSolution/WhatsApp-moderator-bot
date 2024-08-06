@@ -1,133 +1,131 @@
-# fx-bot Bot
+# FX-Bot: Advanced and Simple WhatsApp Bot
 
-fx-bot is a powerful and versatile WhatsApp bot built using Node.js and the Baileys library. This bot offers a wide range of features and capabilities, making it an excellent choice for both personal and commercial use cases.
+Welcome to **FX-Bot**, an advanced yet simple and complex WhatsApp bot developed by Astro. This bot offers a wide range of commands and features to enhance your WhatsApp experience.
 
-[![DigitalOcean Referral Badge](https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%203.svg)](https://www.digitalocean.com/?refcode=9db4c65bb8ee&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge)
+## Features
 
-🚀 Deploy your fx-bot Bot on DigitalOcean and get $200 in free credits! Click the badge above to sign up and take advantage of this amazing offer. DigitalOcean's reliable and scalable cloud infrastructure ensures your bot runs smoothly, no matter how many users you have. Don't miss out on this opportunity to supercharge your WhatsApp experience!
+- **Fast Bot:** Quick response times and efficient processing.
+- **Multi-Platform Support:** Easily deployable on various platforms like Heroku, Koyeb, Render, GitHub Codespaces, and Toy Stack.
+- **WhatsApp Antiban v1:** Built-in anti-ban mechanisms to keep your account safe.
+- **User-Friendly:** Intuitive commands and easy setup.
+- **Constant Updates:** Regular updates with new features and improvements.
 
-## Table of Contents
-
-- [Installation](#installation)
-  - [Prerequisites](#prerequisites)
-  - [Deploy on Any Shell (Including Termux)](#deploy-on-any-shell-including-termux)
-- [Usage](#usage)
-  - [Creating a Plugin](#creating-a-plugin)
-  - [Sending Messages](#sending-messages)
-    - [Replying](#replying)
-    - [Media](#media)
-    - [Sticker](#sticker)
-  - [External Plugins](#external-plugins)
-- [Community and Support](#community-and-support)
-- [Credits](#credits)
-- [License](#license)
-
-## Installation
+## Getting Started
 
 ### Prerequisites
 
-Before installing fx-bot, ensure that you have the following dependencies installed on your system:
+- Node.js (version 16 to 22)
+- npm (version 9 or above)
+- WhatsApp account
 
-- FFmpeg
-- Node.js
+### Installation
 
-### Deploy on Any Shell (Including Termux)
+1. Clone the repository:
 
-To deploy fx-bot on any shell, including Termux, follow these steps:
+   ```sh
+   git clone https://github.com/FXastro/bot.git
+   cd bot
+   ```
 
-1. Fork the fx-bot repository
-2. Edit the `config.js` file with your desired configuration details
-3. Install the required dependencies by running the following commands:
-   - `npm install`
-   - `npm install qrcode-terminal`
-   - `npm install pm2 -g`
-4. To scan the QR code and start the bot, run `npm start`
-5. To connect using a pairing code, run `npm run code`. After pairing, run `npm start` again and scan the QR code
-6. country code is require for connecting via pairing code. If you are from India, you can use `91` as country code. If you are from any other country, you can use your country code.
-7. To stop the bot, press `Ctrl+C`
-8. To start the bot, run `npm start` 
+2. Install dependencies:
+
+   ```sh
+   npm install
+   ```
+
+3. Configure the bot:
+
+   - Create a `.env` file in the root directory.
+   - Add the following environment variables to the `.env` file:
+     ```env
+     ANTILINK=false
+     LOGS=true
+     ANTILINK_ACTION=kick
+     SESSION_ID= ""
+     LANG=EN
+     HANDLERS=[#]
+     WARN_COUNT=3
+     PACKNAME=fx-bot
+     WELCOME_MSG=Hi @user Welcome to @gname
+     GOODBYE_MSG=Hi @user It was Nice Seeing you
+     AUTHOR=X-Electra
+     SUDO=123000000,92000000,234000000
+     OWNER_NAME=YourName
+     BOT_NAME=fx-bot
+     WORK_TYPE=private
+     ```
+
+4. Start the bot:
+   ```sh
+   npm start
+   ```
+
+## Deployment
+
+You can easily deploy FX-Bot to various platforms:
+
+### Heroku
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+### Koyeb
+
+[![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/deploy)
+
+### Render
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
+
+### GitHub Codespaces
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new)
+
+### Railway
+
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new)
+
 
 ## Usage
 
-### Creating a Plugin
+| Command           | Description                            | Category          |
+| ----------------- | -------------------------------------- | ----------------- |
+| /add [number]     | Add a new member to the group          | Group Commands    |
+| /kick [number]    | Remove a member from the group         | Group Commands    |
+| /promote [number] | Promote a member to admin              | Group Commands    |
+| /demote [number]  | Demote an admin to member              | Group Commands    |
+| /download [URL]   | Download media from a provided URL     | Download Commands |
+| /yt [video URL]   | Download YouTube video                 | Download Commands |
+| /weather [city]   | Get weather information for a city     | Tools Commands    |
+| /translate [text] | Translate text to a different language | Tools Commands    |
+| /joke             | Get a random joke                      | Misc Commands     |
+| /quote            | Get a random quote                     | Misc Commands     |
+| /profile [number] | Get the profile information of a user  | Users Commands    |
+| /block [number]   | Block a user                           | Users Commands    |
+| /unblock [number] | Unblock a user                         | Users Commands    |
 
-fx-bot supports custom plugins, which can be created using the following template:
+## Contributing
 
-```javascript
-const { command, isPrivate } = require("../../lib/");
+We welcome contributions from the community! If you'd like to contribute, please fork the repository and submit a pull request.
 
-bot{
-  pattern: "ping", // Command pattern
-  fromMe: isPrivate, // Need to respond for everyone's message? true: only from sudo numbers, false: from everyone, isPrivate: same as false but will be considered as true if worktype is private
-  desc: "To check ping", // Description of the command
-  type: "user", // Command type
-}, async (message, match) => {
-  /* PLUGIN CONTENT HERE */
-});
-```
-
-### Sending Messages
-
-#### Replying
-
-To reply to a message, use the following code:
-
-```javascript
-message.reply("Hi");
-```
-
-#### Media
-
-To send media (image, audio, or video), use the following code:
-
-```javascript
-let content = "https://wallpaperaccess.com/full/5531321.jpg"; // Can also use a buffer
-message.sendMessage(jid, content, {} /* options */, "image" /* change to 'audio' or 'video' when sending audio or video */);
-```
-
-#### Sticker
-
-To send a sticker, use the following code:
-
-```javascript
-message.sendMessage(jid, "url or buffer of image or video (max 10 seconds)", { packname: config.PACKNAME, author: config.AUTHOR }, "sticker");
-```
-
-### External Plugins
-
-fx-bot supports external plugins. You can find more information about external plugins in the [Plugins wiki](https://github.com/X-Electra/fx-bot/wiki/Plugins).
-
-## Community and Support
-
-Join the official WhatsApp group for fx-bot to get support, ask questions, and interact with other users:
-
-[![JOIN WHATSAPP GROUP](https://raw.githubusercontent.com/Neeraj-x0/Neeraj-x0/main/photos/suddidina-join-whatsapp.png)](https://chat.whatsapp.com/DJYrdBENyX33MRppEFPxV6)
-
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a pull request
 
 ## License
 
-fx-bot is licensed under the [MIT License](https://opensource.org/licenses/MIT):
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Acknowledgements
+
+- Thanks to the contributors and the open-source community for their valuable work.
+- Special thanks to the developers of the libraries and tools that made this project possible.
+
+---
+
+Developed by Astro. For more information, visit [Astro's GitHub](https://github.com/FXastro).
 
 ```
-MIT License
 
-Copyright (c) 2023 X-Electra
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
 ```
