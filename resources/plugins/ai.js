@@ -12,6 +12,6 @@ bot(
   await message.reply('_Thinking..._')
   const response = await gpt(match)
   const gptchat = '```GPT: ' + response + '```'
-  await message.sendMessage(message.jid, gptchat)
+  await message.sendMessage(message.jid, gptchat, message.quoted)
  }
 )
