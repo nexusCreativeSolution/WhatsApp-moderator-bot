@@ -6,6 +6,11 @@
  "directories": {
   "lib": "lib"
  },
+ "scripts": {
+  "start": "pm2 start index.js --name fx-bot",
+  "stop": "pm2 stop fx-bot",
+  "restart": "pm2 restart index.js --name fx-bot"
+ },
  "author": "FX-astro",
  "dependencies": {
   "@adiwajshing/keyed-db": "^0.2.4",
@@ -17,6 +22,7 @@
   "browser-id3-writer": "^4.4.0",
   "cheerio": "^1.0.0-rc.12",
   "dotenv": "^16.4.5",
+  "globals": "^15.4.0",
   "file-type": "^16.5.3",
   "fluent-ffmpeg": "^2.1.2",
   "form-data": "^4.0.0",
@@ -38,14 +44,6 @@
   "socket.io-client": "^4.7.5",
   "sqlite3": "^5.1.7",
   "stream-buffers": "^3.0.2",
-  "fx-bot": "^1.0.1"
- },
- "scripts": {
-  "start": "pm2 start index.js --name fx-bot",
-  "stop": "pm2 stop fx-bot",
-  "restart": "pm2 restart index.js --name fx-bot"
- },
- "devDependencies": {
-  "globals": "^15.4.0"
+  "x-asena": "^1.0.1"
  }
 }
