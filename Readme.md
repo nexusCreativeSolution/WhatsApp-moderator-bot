@@ -125,7 +125,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ---
 
 Developed by Astro. For more information, visit [Astro's GitHub](https://github.com/FXastro).
-
-```
-
-```
