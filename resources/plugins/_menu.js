@@ -1,8 +1,10 @@
 const plugins = require('../../lib/plugins')
-const { bot, isPrivate, clockString } = require('../../lib')
+const { bot, isPrivate, clockString, runtime } = require('../../lib')
 const { OWNER_NAME, BOT_NAME } = require('../../config')
-const { hostname } = require('os')
-
+const { hostname, platform } = require('os')
+const config = require('../../config')
+const { tiny } = require('../../lib/fancy')
+const packageVersion = require('../../package.json').version
 bot(
  {
   pattern: 'menu',
@@ -23,15 +25,18 @@ Description: ${i.desc}\`\`\``)
   } else {
    let { prefix } = message
    let [date, time] = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }).split(',')
-   let menu = `╭━━━━━ᆫ ${BOT_NAME} ᄀ━━━
-┃ ⎆  *OWNER*:  ${OWNER_NAME}
-┃ ⎆  *PREFIX*: ${prefix}
-┃ ⎆  *HOST NAME*: ${hostname().split('-')[0]}
-┃ ⎆  *DATE*: ${date}
-┃ ⎆  *TIME*: ${time}
-┃ ⎆  *COMMANDS*: ${plugins.commands.length} 
-┃ ⎆  *UPTIME*: ${clockString(process.uptime())} 
-╰━━━━━━━━━━━━━━━\n`
+   let menu = `\`\`\`╭━━━ ${BOT_NAME} ━━━⊷
+┃✷╭──────────────
+┃✷│ Prefix: ${prefix}
+┃✷│ User: ${message.pushName}
+┃✷│ Platform: ${platform}
+┃✷│ Date ${date}
+┃✷│ Time: ${time}
+┃✷│ Plugins: ${plugins.commands.length} 
+┃✷│ Uptime: ${runtime(process.uptime())} 
+┃✷│ Version: ${packageVersion}
+┃✷╰───────────────
+╰━━━━━━━━━━━━━━━\`\`\`\n`
    let cmnd = []
    let cmd
    let category = []
@@ -49,13 +54,13 @@ Description: ${i.desc}\`\`\``)
     }
    })
    cmnd.sort()
-   category.sort().forEach(cmmd => {
-    menu += `\n\t⦿---- *${cmmd.toUpperCase()}* ----⦿\n`
-    let comad = cmnd.filter(({ type }) => type == cmmd)
+   category.sort().forEach(categories => {
+    menu += `\n╭─❏ \`\`\`${tiny(categories)}\`\`\` ❏`
+    let comad = cmnd.filter(({ type }) => type == categories)
     comad.forEach(({ cmd }) => {
-     menu += `\n⛥  _${cmd.trim()}_ `
+     menu += `\n│  _${tiny(cmd.trim())}_ `
     })
-    menu += `\n`
+    menu += `\n╰─────────────────`
    })
 
    menu += `\n`
