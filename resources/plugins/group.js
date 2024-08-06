@@ -1,6 +1,4 @@
-const { bot, isPrivate } = require('../../lib/')
-const { isAdmin, parsedJid } = require('../../lib')
-
+const { bot, isAdmin, parsedJid, isPrivate } = require('../lib')
 bot(
  {
   pattern: 'add',
@@ -188,6 +186,143 @@ bot(
   const { participants } = await message.client.groupMetadata(message.jid)
   message.sendMessage(message.jid, match, {
    mentions: participants.map(a => a.id),
+  })
+ }
+)
+
+bot(
+ {
+  pattern: 'lock',
+  fromMe: true,
+  desc: 'Allows Only Admins to Edit Gc Settings',
+  type: 'group',
+ },
+ async (message, match) => {
+  if (!message.isGroup) return await message.reply('_This command is for groups_')
+  if (!isAdmin(message.jid, message.user, message.client)) return await message.reply('_I am not admin_')
+  await message.reply('_Locking Group_')
+  await message.client.groupSettingUpdate(message.jid, 'locked')
+ }
+)
+
+bot(
+ {
+  pattern: 'unlock',
+  fromMe: true,
+  desc: 'Allows All Members To Edit Gc Settings',
+  type: 'group',
+ },
+ async (message, match) => {
+  if (!message.isGroup) return await message.reply('_This command is for groups_')
+  if (!isAdmin(message.jid, message.user, message.client)) return await message.reply('_I am not admin_')
+  await message.reply('_Unlocking Group_')
+  await message.client.groupSettingUpdate(message.jid, 'unlocked')
+ }
+)
+
+bot(
+ {
+  pattern: 'requests',
+  fromMe: true,
+  desc: 'View Group Join Requests',
+  type: 'group',
+ },
+ async message => {
+  if (!message.isGroup) return await message.reply('_This command is for groups_')
+  if (!isAdmin(message.jid, message.user, message.client)) return await message.reply('_I am not admin_')
+  const requests = await message.client.groupRequestParticipantsList(message.jid)
+  if (!requests || requests.length === 0) {
+   return await message.reply('_No Requests Yet_')
+  }
+  let requestList = '_Join Requests_\n\n'
+  for (const request of requests) {
+   requestList += `@${request.jid.split('@')[0]}\n`
+  }
+  await message.reply(requestList, { mentions: requests.map(r => r.jid) })
+ }
+)
+
+bot(
+ {
+  pattern: 'accept',
+  fromMe: true,
+  desc: 'Accept Group Join Requests',
+  type: 'group',
+ },
+ async message => {
+  if (!message.isGroup) return await message.reply('_This command is for groups_')
+  if (!isAdmin(message.jid, message.user, message.client)) return await message.reply('_I am not admin_')
+  const requests = await message.client.groupRequestParticipantsList(message.chat)
+  if (!requests || requests.length === 0) {
+   return await message.reply('No Join Requests Yet.')
+  }
+  let acceptedList = 'List of accepted users\n\n'
+  for (const request of requests) {
+   await message.client.groupRequestParticipantsUpdate(message.jid, [request.jid], 'approve')
+   acceptedList += `@${request.jid.split('@')[0]}\n`
+  }
+  await message.reply(acceptedList, { mentions: requests.map(r => r.jid) })
+ }
+)
+
+bot(
+ {
+  pattern: 'reject',
+  fromMe: true,
+  desc: 'Reject Group Join Requests',
+  type: 'group',
+ },
+ async message => {
+  if (!message.isGroup) return await message.reply('_This command is for groups_')
+  if (!isAdmin(message.jid, message.user, message.client)) return await message.reply('_I am not admin_')
+  const requests = await message.client.groupRequestParticipantsList(message.chat)
+  if (!requests || requests.length === 0) {
+   return await message.reply('No Join Requests Yet.')
+  }
+  let rejectedList = 'List of rejected users\n\n'
+  for (const request of requests) {
+   await message.client.groupRequestParticipantsUpdate(message.jid, [request.jid], 'reject')
+   rejectedList += `@${request.jid.split('@')[0]}\n`
+  }
+  await message.reply(rejectedList, { mentions: requests.map(r => r.jid) })
+ }
+)
+
+bot(
+ {
+  pattern: 'vote',
+  fromMe: isPrivate,
+  desc: 'Create Poll',
+  type: 'group',
+ },
+ async (message, match) => {
+  const [question, options] = details.split(',')
+  if (options.length < 2) {
+   return message.reply('_Use .vote question;option1,option2')
+  }
+  const pollOptions = options.split(',').filter(option => option.trim())
+  await message.client.sendMessage(message.jid, {
+   poll: { name: question, values: pollOptions },
+  })
+ }
+)
+
+bot(
+ {
+  pattern: 'tagadmin',
+  desc: 'Tags only Admin numbers',
+  category: 'group',
+ },
+ async (context, message) => {
+  if (!message.isGroup) return await message.reply('_This command is for groups_')
+  if (!isAdmin(message.jid, message.user, message.client)) return await message.reply('_I am not admin_')
+
+  const adminList = context.admins.map(admin => ` *|  @${admin.id.split('@')[0]}*`).join('\n')
+  const tagMessage = `\n▢ FROM: @${context.sender.split('@')[0]}\n${message ? '≡ Message: ' + message : ''}\n\n*┌─⊷ GROUP ADMINS*\n${adminList}\n*└───────────⊷*\n\n${Config.caption}`.trim()
+
+  await context.client.sendMessage(context.chat, {
+   text: tagMessage,
+   mentions: [context.sender, ...context.admins.map(admin => admin.id)],
   })
  }
 )
