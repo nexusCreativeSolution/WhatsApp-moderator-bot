@@ -6,7 +6,7 @@ session/
 
 resources/plugins/eval.js
 resources/database/store.json
-resources/database.db
+database.db
 
 
 package-lock.json

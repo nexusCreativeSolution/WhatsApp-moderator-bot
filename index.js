@@ -21,12 +21,6 @@ const readAndRequireFiles = async directory => {
 async function startBot() {
  console.log('fx-bot')
  try {
-  if (config.SESSION_ID && !fs.existsSync('session')) {
-   console.log('loading session from session id...')
-   fs.mkdirSync('./session')
-   const credsData = await loadSession(config.SESSION_ID)
-   fs.writeFileSync('./session/creds.json', JSON.stringify(credsData.creds, null, 2))
-  }
   await readAndRequireFiles(path.join(__dirname, '/resources/database/'))
   console.log('Syncing Database')
 
