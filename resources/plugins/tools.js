@@ -91,9 +91,14 @@ bot(
   type: 'tools',
  },
  async (message, match) => {
+  if (typeof match !== 'string') {
+   return await message.reply('Invalid input. Please use the format: \n\t_lyric song;artist_')
+  }
+
   const [song, artist] = match.split(';').map(item => item.trim())
+
   if (!song || !artist) {
-   await message.reply('Search with this format: \n\t_lyric song;artist_')
+   return await message.reply('Search with this format: \n\t_lyric song;artist_')
   } else {
    try {
     const data = await getLyrics(song, artist)
@@ -103,6 +108,7 @@ bot(
      return await message.reply('No lyrics found for this song by this artist.')
     }
    } catch (error) {
+    console.error('Error fetching lyrics:', error) // Log the error for debugging
     return await message.reply('An error occurred while fetching lyrics.')
    }
   }

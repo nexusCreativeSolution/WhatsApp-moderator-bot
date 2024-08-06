@@ -7,9 +7,9 @@
   "lib": "lib"
  },
  "scripts": {
-  "start": "pm2 start index.js --name fx-bot",
+  "start": "node index.js --name fx-bot",
   "stop": "pm2 stop fx-bot",
-  "restart": "pm2 restart index.js --name fx-bot"
+  "restart": "node index.js --name fx-bot"
  },
  "author": "FX-astro",
  "dependencies": {
