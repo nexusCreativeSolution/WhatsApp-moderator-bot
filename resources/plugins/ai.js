@@ -5,7 +5,7 @@ bot(
  {
   pattern: 'gpt',
   info: 'Chat With Gpt',
-  type: 'chat ai',
+  type: 'ai',
  },
  async (message, match) => {
   if (!match) return await message.reply('Hello, how can I assist you today?')
@@ -14,4 +14,22 @@ bot(
   const gptchat = '```GPT: ' + response + '```'
   await message.sendMessage(message.jid, gptchat, message.quoted)
  }
+)
+
+bot(
+ {
+  pattern: 'gemini',
+  info: 'Chat With Gemini',
+  type: 'ai',
+ },
+ async (message, match) => {}
+)
+
+bot(
+ {
+  pattern: 'dalle',
+  info: 'Generate Images With Dall-e',
+  type: 'ai',
+ },
+ async (message, match) => {}
 )
