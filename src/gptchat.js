@@ -1,6 +1,6 @@
 const fetch = require('node-fetch')
 
-async function gpt(query) {
+function gpt(query) {
  const apiUrl = `https://api.prabath-md.tech/api/gptv1?q=${encodeURIComponent(query)}`
 
  return fetch(apiUrl)
@@ -17,12 +17,12 @@ async function gpt(query) {
    throw error
   })
 }
-exports.gpt = gpt
+module.exports = { gpt }
 // Usage
-gpt('Hello')
- .then(response => {
-  console.log('Response:', response)
- })
- .catch(error => {
-  console.error('Error:', error.message)
- })
+//gpt('Hello')
+// .then(response => {
+//  console.log('Response:', response)
+// })
+// .catch(error => {
+//  console.error('Error:', error.message)
+// })
